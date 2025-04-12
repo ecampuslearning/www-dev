@@ -1,0 +1,5 @@
+supervisor
+setuptools
+fastapi
+uvicorn[standard]
+pydantic

@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  # release daily
+  # https://crontab-generator.org/
+  schedule:
+    - cron: "0 8 * * *"
+  # or on manual trigger
+  workflow_dispatch:
+
+permissions: {}
+
+# Only run one release at a time to avoid duplicate attempts to publish particular versions.
+# To avoid backups after multiple pushes in rapid succession, the prerelease job below emulates
+# batching (which github actions don't support) by skipping the release job if a newer run is pending.
+#
+# (There's an option "cancel-in-progress" to cancel in-progress workflows upon a new request, but
+# that's not safe because it could potentially cause a job to be cancelled in the middle of the
+# actual npm publish step, leaving things in an inconsistent state.)
+concurrency:
+  group: release-${{ github.ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # This environment contains secrets needed for publishing
+    environment: release
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          # Don't save creds in the git config (so it's easier to override later)
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+
+      - run: yarn --frozen-lockfile
+
+      - run: yarn build
+      - run: yarn build:docs
+
+      - run: yarn test
+
+      - name: Publish package
+        run: |
+          git config user.email "kchau@microsoft.com"
+          git config user.name "Ken Chau"
+
+          # Get the existing remote URL without creds, and use a trap (like try/finally)
+          # to restore it after this step finishes
+          trap "git remote set-url origin '$(git remote get-url origin)'" EXIT
+
+          # Add a token to the remote URL for auth during release
+          git remote set-url origin "https://$REPO_PAT@github.com/$GITHUB_REPOSITORY"
+
+          yarn release -y -n "$NPM_AUTHTOKEN"
+        env:
+          NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
+          REPO_PAT: ${{ secrets.REPO_PAT }}
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: docs
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

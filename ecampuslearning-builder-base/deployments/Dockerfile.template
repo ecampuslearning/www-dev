@@ -1,0 +1,223 @@
+# -----------------------------------------------------------------------------
+# Devcontainer Customization Dockerfile
+# -----------------------------------------------------------------------------
+#
+# Extends: .devcontainer/deployments/Dockerfile
+#
+# Base image features:
+#   - Ubuntu 24.04
+#   - Common CLI tools (curl, git, jq, yq, zsh, bash, etc.)
+#   - Docker CLI, Buildx, Compose plugin
+#   - hadolint, trivy
+#   - Non-root user 'vscode' with passwordless sudo
+#   - WORKDIR: /workspaces
+#   - DEBIAN_FRONTEND reset to dialog at runtime
+#
+# Build ARGs:
+#   - USER (default: vscode)
+#   - PROJECT (from devcontainer.json)
+#   - WORKSPACE_DIR (from devcontainer.json)
+#
+# ENV variables:
+#   - DEBIAN_FRONTEND (noninteractive during build, dialog at runtime)
+#   - USER (vscode)
+#   - PROJECT_NAME, WORKSPACE_DIR, DOCKER_HOST (from devcontainer.json)
+# -----------------------------------------------------------------------------
+
+# Base image configuration
+# These ARGs can be overridden at build time
+ARG BASE_IMAGE="ghcr.io/izykitten/devcontainer"
+ARG BASE_IMAGE_TAG="base"
+# Optional: Pin to a specific digest for reproducibility and security
+ARG BASE_IMAGE_DIGEST="sha256:95da675c3c9e8a2e668db754325823ad9784c861b28bf370f56f2c4bd046afce"
+ARG USER
+
+# Project metadata (override only what you need)
+ARG PROJECT_TITLE="Devcontainer Customization Stub"
+ARG PROJECT_DESCRIPTION="Project-specific customizations for the devcontainer base image"
+ARG IMAGE_AUTHORS="unknown"
+ARG IMAGE_MAINTAINERS_JSON='[{"name":"unknown","email":"unknown"}]'
+ARG IMAGE_VENDOR="unknown"
+ARG IMAGE_VENDOR_URL="unknown"
+ARG IMAGE_SOURCE="unknown"
+ARG IMAGE_DEPRECATED="false"
+ARG IMAGE_GITHUB_COLOR="purple"
+ARG IMAGE_KEYWORDS=""
+ARG IMAGE_FEATURES="git,python,trivy,hadolint,dockle,dive,checkov,syft,grype,goss,ctop,opa,crictl"
+
+# Direct references for Dependabot to track updates
+# These are commented out but still parsed by Dependabot
+# Base image reference
+# FROM ghcr.io/izykitten/devcontainer:base@sha256:95da675c3c9e8a2e668db754325823ad9784c861b28bf370f56f2c4bd046afce AS dependabot_base_reference
+# Alpine utility image
+# FROM docker.io/library/alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1 AS dependabot_alpine_reference
+
+# Stage 1: Extract base image digest from registry
+# This allows tracking the exact base image used in build metadata
+FROM docker.io/library/alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1 AS digest_extractor
+
+# Redeclare required ARGs for this stage
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+
+# Use cache mount for Alpine package operations
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+    apk add --no-cache skopeo jq curl
+
+# Retrieve digest for the specified base image
+RUN skopeo inspect docker://${BASE_IMAGE}:${BASE_IMAGE_TAG}@${BASE_IMAGE_DIGEST} | jq -r '.Digest' > /tmp/base_digest && \
+    # Create labels for the base image digest
+    echo "LABEL org.opencontainers.image.base.digest=\"$(cat /tmp/base_digest)\"" > /tmp/digest_label
+
+
+# Stage 2: Build the final image
+# If BASE_IMAGE_DIGEST is provided, use it to pin the image
+FROM ${BASE_IMAGE}:${BASE_IMAGE_TAG}${BASE_IMAGE_DIGEST:+@$BASE_IMAGE_DIGEST}
+
+# Copy digest file from previous stage
+COPY --from=digest_extractor /tmp/base_digest /tmp/base_digest
+COPY --from=digest_extractor /tmp/digest_label /tmp/digest_label
+
+# Set noninteractive frontend for apt installs during build
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Redeclare build args for this stage
+ARG USER
+ARG PROJECT_TITLE
+ARG PROJECT_DESCRIPTION
+ARG IMAGE_AUTHORS
+ARG IMAGE_MAINTAINERS_JSON
+ARG IMAGE_VENDOR
+ARG IMAGE_VENDOR_URL
+ARG IMAGE_SOURCE
+ARG IMAGE_DEPRECATED
+ARG IMAGE_GITHUB_COLOR
+ARG IMAGE_KEYWORDS
+ARG IMAGE_FEATURES
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+
+LABEL org.opencontainers.image.base.digest="$(cat /tmp/base_digest)"
+
+# Then apply the rest of the labels
+LABEL \
+  org.opencontainers.image.title="$PROJECT_TITLE" \
+  org.opencontainers.image.description="$PROJECT_DESCRIPTION" \
+  org.opencontainers.image.authors="$IMAGE_AUTHORS" \
+  org.opencontainers.image.vendor="$IMAGE_VENDOR" \
+  org.opencontainers.image.vendor_url="$IMAGE_VENDOR_URL" \
+  org.opencontainers.image.source="$IMAGE_SOURCE" \
+  org.opencontainers.image.features="$IMAGE_FEATURES" \
+  org.opencontainers.image.base.name="$BASE_IMAGE:$BASE_IMAGE_TAG"
+
+# -----------------------------------------------------------------------------
+# Build arguments for project-specific customization
+# -----------------------------------------------------------------------------
+# NOTE: The digest extraction above ensures proper provenance tracking.
+# Each image in the chain properly identifies its direct parent image and
+# exact version via the base.name and base.digest labels.
+# For derived images, you should use a similar pattern to track provenance.
+
+
+# -----------------------------------------------------------------------------
+# Root-level customizations (install packages, etc.)
+# -----------------------------------------------------------------------------
+USER root
+
+# Example: Install additional packages with APT cache mounts
+# This template shows the recommended pattern for APT operations
+# Note: Using BuildKit cache mounts eliminates the need for apt-get clean after each step
+# For comprehensive caching documentation, see: ../docs/CACHING-STRATEGY.md
+# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     apt-get update && apt-get install -y --no-install-recommends \
+#     # Group packages by category with comments for better readability
+#     # Development tools
+#     package-name-1 \
+#     package-name-2 \
+#     # Runtime dependencies
+#     package-name-3
+
+# Example: Install a local .deb package with APT cache
+# RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+#     --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     # Download and cache the .deb file
+#     curl -sSL https://example.com/package.deb -o /tmp/download-cache/package.deb && \
+#     # Install from the cached location
+#     apt-get install -y --no-install-recommends /tmp/download-cache/package.deb
+
+# Example: Add a new repository and install packages
+# RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+#     # Setup repository
+#     mkdir -p /etc/apt/keyrings && \
+#     curl -fsSL https://example.com/repo.gpg -o /tmp/download-cache/example.gpg && \
+#     gpg --dearmor < /tmp/download-cache/example.gpg > /etc/apt/keyrings/example.gpg && \
+#     chmod a+r /etc/apt/keyrings/example.gpg && \
+#     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/example.gpg] https://example.com/repo stable main" > /etc/apt/sources.list.d/example.list
+#
+# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+#     apt-get update && apt-get install -y --no-install-recommends \
+#     # Group packages from the new repository
+#     package-name-1 \
+#     package-name-2 \
+#     package-name-3
+
+# Example: Install Node.js packages with npm cache
+# RUN --mount=type=cache,target=/root/.npm,sharing=locked \
+#     npm install -g package-name
+
+# Example: Install Python packages with pip cache
+# RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+#     pip install package-name
+
+# Example: Install Python packages with pipx cache
+# RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+#     --mount=type=cache,target=/root/.cache/pipx,sharing=locked \
+#     pipx install package-name
+
+# Example: Clone and build from git repository with cache
+# RUN --mount=type=cache,target=/tmp/git-cache,sharing=locked \
+#     REPO_URL="https://github.com/example/repo.git" && \
+#     REPO_DIR="/tmp/git-cache/repo" && \
+#     REPO_VERSION="v1.2.3" && \
+#     # Clone or update the repository in cache
+#     if [ ! -d "$REPO_DIR" ]; then \
+#         git clone --depth 1 --branch "$REPO_VERSION" "$REPO_URL" "$REPO_DIR"; \
+#     else \
+#         cd "$REPO_DIR" && git fetch && git checkout "$REPO_VERSION"; \
+#     fi && \
+#     # Build or install from the cached repository
+#     cd "$REPO_DIR" && \
+#     make install
+
+
+# Example: Download and install binary tools with cache
+# RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+#     # Check if tool already exists in cache
+#     TOOL_VERSION=$(curl -s https://api.github.com/repos/example/tool/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+#     if [ ! -f "/tmp/download-cache/tool-${TOOL_VERSION}" ]; then \
+#         curl -sSL https://example.com/tool/releases/download/${TOOL_VERSION}/tool-linux-amd64 \
+#         -o /tmp/download-cache/tool-${TOOL_VERSION}; \
+#     fi && \
+#     # Install from cache to the system
+#     cp /tmp/download-cache/tool-${TOOL_VERSION} /usr/local/bin/tool && \
+#     chmod +x /usr/local/bin/tool
+
+
+
+# -----------------------------------------------------------------------------
+# User-level customizations (env vars, user tools, etc.)
+# -----------------------------------------------------------------------------
+USER ${USER}
+# Example: Set up environment variables or install user-level tools
+
+
+
+# -----------------------------------------------------------------------------
+# Reset DEBIAN_FRONTEND for interactive use at runtime
+# -----------------------------------------------------------------------------
+ENV DEBIAN_FRONTEND=dialog

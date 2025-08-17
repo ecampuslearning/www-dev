@@ -1,0 +1,9 @@
+{
+    "azureFunctions.deploySubpath": "learning-dev-containers/src/azure-static-web-apps/test-project/api",
+    "azureFunctions.postDeployTask": "npm install (functions)",
+    "azureFunctions.projectLanguage": "JavaScript",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.projectSubpath": "learning-dev-containers/src/azure-static-web-apps/test-project/api",
+    "azureFunctions.preDeployTask": "npm prune (functions)"
+}

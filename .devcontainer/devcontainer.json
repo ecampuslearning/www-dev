@@ -1,0 +1,119 @@
+{
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": "."
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {},
+        "ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/dotnet:2": {},
+        "ghcr.io/devcontainers/features/git-lfs:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/powershell:1": {},
+        "ghcr.io/stuartleeks/dev-container-features/azure-cli-persistence:0": {},
+        "ghcr.io/lukewiwa/features/wait-for-it:0": {},
+        "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
+        "ghcr.io/frntn/devcontainers-features/postman:1": {},
+        "ghcr.io/dapr/cli/dapr-cli:0": {},
+        "ghcr.io/azutake/devcontainer-features/go-packages-install:0": {},
+        "ghcr.io/joshuanianji/devcontainer-features/gcloud-cli-persistence:1": {},
+        "ghcr.io/joshuanianji/devcontainer-features/terraform-cli-persistence:1": {},
+        "ghcr.io/azure/azure-dev/azd:0": {},
+        "ghcr.io/itsmechlark/features/doppler:2": {},
+        "ghcr.io/itsmechlark/features/postgresql:1": {},
+        "ghcr.io/marcozac/devcontainer-features/atlas:1": {},
+        "ghcr.io/bartventer/arch-devcontainer-features/gcloud-cli:1": {},
+        "ghcr.io/enrico9034/devcontainer-features/openstack-cli:1": {},
+        "ghcr.io/jpawlowski/devcontainer-features/cli-microsoft365:1": {},
+        "ghcr.io/jpawlowski/devcontainer-features/pnp.powershell:1": {},
+        "ghcr.io/localstack/devcontainer-feature/localstack-cli:0": {},
+        "ghcr.io/devcontainers-extra/features/angular-cli:2": {},
+        "ghcr.io/devcontainers-extra/features/bash-command:1": {},
+        "ghcr.io/devcontainers-extra/features/bin:1": {},
+        "ghcr.io/devcontainers-extra/features/circleci-cli:1": {},
+        "ghcr.io/devcontainers-extra/features/devcontainers-cli:1": {},
+        "ghcr.io/devcontainers-extra/features/kind:1": {},
+        "ghcr.io/devcontainers-extra/features/terraform-asdf:2": {},
+        "ghcr.io/devcontainers-extra/features/vscode-cli:1": {},
+        "ghcr.io/bascodes/devcontainer-features/cf-warp-cli:1": {}
+    },
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"github.copilot.chat.codeGeneration.instructions": [
+					{
+						"text": "This dev container includes the .NET SDK, which includes the .NET CLI and the shared runtime, pre-installed and available on the `PATH`, along with the C# language extension for .NET development."
+					}
+				]
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+                "ms-dotnettools.csharp",
+                "shd101wyy.markdown-preview-enhanced",
+                "bierner.markdown-preview-github-styles",
+                "bierner.github-markdown-preview",
+                "hnw.vscode-auto-open-markdown-preview",
+                "docsmsft.docs-markdown",
+                "CS50.markdown50",
+                "yzane.markdown-pdf",
+                "yzhang.markdown-all-in-one",
+                "ms-vscode.vscode-markdown-notebook",
+                "kurusugawa-computer.markdown-copilot",
+                "bierner.markdown-shiki",
+                "tom-latham.markdown-pdf-plus",
+                "Successible.markdown-wiki",
+                "jackos.mdlab",
+                "ywfhighlo.markdown-hub",
+                "vv13.markdown-auto-preview",
+                "bodrick.vscode-extensions-markdown",
+                "esbenp.prettier-vscode",
+                "REditorSupport.r",
+                "ms-vscode.wordcount",
+                "docsmsft.docs-preview",
+                "docsmsft.docs-article-templates",
+                "docsmsft.docs-authoring-pack",
+                "XuangeAha.vsmarketplace-badges",
+                "docsmsft.learnlinter",
+                "Vue.volar"
+            ]
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
+	// [Optional] To reuse of your local HTTPS dev cert:
+	//
+	// 1. Export it locally using this command:
+	//    * Windows PowerShell:
+	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	//    * macOS/Linux terminal:
+	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	// 
+	// 2. Uncomment these 'remoteEnv' lines:
+	//    "remoteEnv": {
+	// 	      "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+	//        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+	//    },
+	//
+	// 3. Do one of the following depending on your scenario:
+	//    * When using GitHub Codespaces and/or Remote - Containers:
+	//      1. Start the container
+	//      2. Drag ~/.aspnet/https/aspnetapp.pfx into the root of the file explorer
+	//      3. Open a terminal in VS Code and run "mkdir -p /home/vscode/.aspnet/https && mv aspnetapp.pfx /home/vscode/.aspnet/https"
+	//
+	//    * If only using Remote - Containers with a local container, uncomment this line instead:
+	//      "mounts": [ "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind" ],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

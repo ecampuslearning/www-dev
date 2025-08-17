@@ -1,0 +1,44 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: PR
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  # For PRs, use the ref (branch) in the concurrency group so that new pushes cancel any old runs.
+  # For pushes to main, ideally we wouldn't set a concurrency group, but github actions doesn't
+  # support conditional blocks of settings, so we use the SHA so the "group" is unique.
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+
+      - run: yarn --frozen-lockfile
+
+      - run: yarn format:check
+
+      - run: yarn build
+
+      # checkchange must come after build in case beachball ends up using the local workspace-tools
+      # (this will happen when beachball depends on a workspace-tools version which is compatible
+      # with the local version)
+      - run: yarn checkchange
+
+      - run: yarn build:docs
+
+      - run: yarn test

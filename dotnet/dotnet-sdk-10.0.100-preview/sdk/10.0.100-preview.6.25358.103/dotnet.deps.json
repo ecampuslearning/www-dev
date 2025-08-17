@@ -1,0 +1,1582 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "dotnet.deps.json/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.Build.NuGetSdkResolver": "6.15.0-preview.1.86",
+          "Microsoft.Build.Tasks.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "Microsoft.DotNet.Cli": "10.0.100-preview.6.25358.103",
+          "Microsoft.NET.Sdk.WorkloadMSBuildSdkResolver": "10.0.100-preview.6.25358.103",
+          "Microsoft.NET.StringTools": "17.15.0-preview-25358-103",
+          "Microsoft.TestPlatform.Build": "17.15.0-preview-25358-103",
+          "NuGet.Build.Tasks": "6.15.0-preview.1.86",
+          "NuGet.Build.Tasks.Console": "6.15.0-preview.1.86",
+          "NuGet.Common": "6.15.0-preview.1.86",
+          "NuGet.Localization": "6.15.0-preview.1.86",
+          "NuGet.ProjectModel": "6.15.0-preview.1.86",
+          "System.CodeDom": "10.0.0-preview.6.25358.103",
+          "System.Resources.Extensions": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103",
+          "sdk-tasks": "10.0.100-preview.6.25358.103",
+          "tool_msbuild": "10.0.100-preview.6.25358.103",
+          "tool_nuget": "10.0.100-preview.6.25358.103",
+          "dotnet": "10.0.100.0"
+        },
+        "runtime": {}
+      },
+      "Microsoft.ApplicationInsights/2.23.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
+            "assemblyVersion": "2.23.0.29",
+            "fileVersion": "2.23.0.29"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.DeveloperCertificates.XPlat/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.DeveloperCertificates.XPlat.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Build/17.15.0-preview-25358-103": {
+        "dependencies": {
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.NET.StringTools": "17.15.0-preview-25358-103",
+          "System.Configuration.ConfigurationManager": "10.0.0-preview.6.25358.103",
+          "System.Diagnostics.EventLog": "10.0.0-preview.6.25358.103",
+          "System.Reflection.MetadataLoadContext": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Build.dll": {
+            "assemblyVersion": "15.1.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.Build.Framework/17.15.0-preview-25358-103": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Build.Framework.dll": {
+            "assemblyVersion": "15.1.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.Build.Localization/17.15.0-preview-25358-103": {},
+      "Microsoft.Build.NuGetSdkResolver/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "NuGet.Commands": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Build.NuGetSdkResolver.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "Microsoft.Build.Tasks.Core/17.15.0-preview-25358-103": {
+        "dependencies": {
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "Microsoft.NET.StringTools": "17.15.0-preview-25358-103",
+          "System.CodeDom": "10.0.0-preview.6.25358.103",
+          "System.Configuration.ConfigurationManager": "10.0.0-preview.6.25358.103",
+          "System.Diagnostics.EventLog": "10.0.0-preview.6.25358.103",
+          "System.Formats.Nrbf": "10.0.0-preview.6.25358.103",
+          "System.Resources.Extensions": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.Pkcs": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.Xml": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Build.Tasks.Core.dll": {
+            "assemblyVersion": "15.1.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.Build.Utilities.Core/17.15.0-preview-25358-103": {
+        "dependencies": {
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.NET.StringTools": "17.15.0-preview-25358-103",
+          "System.Configuration.ConfigurationManager": "10.0.0-preview.6.25358.103",
+          "System.Diagnostics.EventLog": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Build.Utilities.Core.dll": {
+            "assemblyVersion": "15.1.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.CodeAnalysis.Common/5.0.0-1.25358.103": {
+        "runtime": {
+          "lib/net9.0/Microsoft.CodeAnalysis.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.CodeAnalysis.CSharp/5.0.0-1.25358.103": {
+        "dependencies": {
+          "Microsoft.CodeAnalysis.Common": "5.0.0-1.25358.103"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.CodeAnalysis.CSharp.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Deployment.DotNet.Releases/2.0.0-preview.1.25358.103": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Deployment.DotNet.Releases.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Configuration.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Abstractions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Binder/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.FileExtensions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileProviders.Physical": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Ini/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.FileExtensions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Configuration.Ini.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyModel/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.DependencyModel.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Abstractions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Physical/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileSystemGlobbing": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.FileProviders.Physical.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.FileSystemGlobbing.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Options": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Logging.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Configuration/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Binder": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Options": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Logging.Configuration.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Console/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Logging.Configuration": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Options": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Logging.Console.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Binder": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Options": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.Primitives": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.NET.HostModel/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/Microsoft.NET.HostModel.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.NET.StringTools/17.15.0-preview-25358-103": {
+        "runtime": {
+          "lib/net9.0/Microsoft.NET.StringTools.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Abstractions/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Abstractions.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Core/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Abstractions": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Core.Contracts": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Utils": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Core.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Core.Contracts/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Abstractions": "10.0.100-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Core.Contracts.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Edge/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Abstractions": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Utils": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3",
+          "NuGet.Configuration": "6.15.0-preview.1.86",
+          "NuGet.Credentials": "6.15.0-preview.1.86",
+          "NuGet.Protocol": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Edge.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Orchestrator.RunnableProjects/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Core": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Core.Contracts": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Orchestrator.RunnableProjects.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Utils/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Abstractions": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateEngine.Utils.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateSearch.Common/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Abstractions": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.TemplateSearch.Common.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.Build/17.15.0-preview-25358-103": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.TestPlatform.Build.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "17.1500.25.35903"
+          }
+        },
+        "runtimeTargets": {}
+      },
+      "Microsoft.VisualStudio.SolutionPersistence/1.0.52": {
+        "runtime": {
+          "lib/net8.0/Microsoft.VisualStudio.SolutionPersistence.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.52.6595"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "NuGet.Build.Tasks/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Microsoft.Build.Tasks.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "NuGet.Commands": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net9.0/NuGet.Build.Tasks.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        },
+        "runtimeTargets": {}
+      },
+      "NuGet.Build.Tasks.Console/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Tasks.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "NuGet.Build.Tasks": "6.15.0-preview.1.86"
+        },
+        "runtimeTargets": {}
+      },
+      "NuGet.CommandLine.XPlat/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.VisualStudio.SolutionPersistence": "1.0.52",
+          "NuGet.Commands": "6.15.0-preview.1.86",
+          "System.CommandLine": "2.0.0-beta6.25358.103"
+        },
+        "runtime": {
+          "lib/net9.0/NuGet.CommandLine.XPlat.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Commands/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileSystemGlobbing": "10.0.0-preview.6.25358.103",
+          "NuGet.Credentials": "6.15.0-preview.1.86",
+          "NuGet.ProjectModel": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.Commands.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Common/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Frameworks": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NuGet.Common.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Configuration/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Common": "6.15.0-preview.1.86",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NuGet.Configuration.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Credentials/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Protocol": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.Credentials.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.DependencyResolver.Core/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Configuration": "6.15.0-preview.1.86",
+          "NuGet.LibraryModel": "6.15.0-preview.1.86",
+          "NuGet.Protocol": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.DependencyResolver.Core.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Frameworks/6.15.0-preview.1.86": {
+        "runtime": {
+          "lib/netstandard2.0/NuGet.Frameworks.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.LibraryModel/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Common": "6.15.0-preview.1.86",
+          "NuGet.Versioning": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NuGet.LibraryModel.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Localization/6.15.0-preview.1.86": {},
+      "NuGet.Packaging/6.15.0-preview.1.86": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "NuGet.Configuration": "6.15.0-preview.1.86",
+          "NuGet.Versioning": "6.15.0-preview.1.86",
+          "System.Security.Cryptography.Pkcs": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.Packaging.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.ProjectModel/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.DependencyResolver.Core": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.ProjectModel.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Protocol/6.15.0-preview.1.86": {
+        "dependencies": {
+          "NuGet.Packaging": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "lib/net8.0/NuGet.Protocol.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "NuGet.Versioning/6.15.0-preview.1.86": {
+        "runtime": {
+          "lib/netstandard2.0/NuGet.Versioning.dll": {
+            "assemblyVersion": "6.15.0.86",
+            "fileVersion": "6.15.0.86"
+          }
+        }
+      },
+      "System.CodeDom/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.CodeDom.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.CommandLine/2.0.0-beta6.25358.103": {
+        "runtime": {
+          "lib/net8.0/System.CommandLine.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.25.35903"
+          }
+        }
+      },
+      "System.Configuration.ConfigurationManager/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "10.0.0-preview.6.25358.103",
+          "System.Security.Cryptography.ProtectedData": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Diagnostics.EventLog/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          },
+          "runtimes/win/lib/net10.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Formats.Nrbf/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.Formats.Nrbf.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.IO.Hashing/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.IO.Hashing.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Reflection.MetadataLoadContext/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.Reflection.MetadataLoadContext.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Resources.Extensions/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "System.Formats.Nrbf": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/System.Resources.Extensions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Security.Cryptography.Pkcs/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.Security.Cryptography.Pkcs.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/10.0.0-preview.6.25358.103": {
+        "runtime": {
+          "lib/net10.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.Security.Cryptography.Xml/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/System.Security.Cryptography.Xml.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "System.ServiceProcess.ServiceController/10.0.0-preview.6.25358.103": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.Cli/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.23.0",
+          "Microsoft.AspNetCore.DeveloperCertificates.XPlat": "10.0.0-preview.6.25358.103",
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.CodeAnalysis.CSharp": "5.0.0-1.25358.103",
+          "Microsoft.Deployment.DotNet.Releases": "2.0.0-preview.1.25358.103",
+          "Microsoft.DotNet.Cli.Utils": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.Configurer": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.InternalAbstractions": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.NativeWrapper": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.TemplateLocator": "10.0.100-preview.6.25358.103",
+          "Microsoft.Extensions.Configuration.Ini": "10.0.0-preview.6.25358.103",
+          "Microsoft.Extensions.FileSystemGlobbing": "10.0.0-preview.6.25358.103",
+          "Microsoft.NET.HostModel": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Cli": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Orchestrator.RunnableProjects": "10.0.100-preview.6.25358.103",
+          "Microsoft.VisualStudio.SolutionPersistence": "1.0.52",
+          "Microsoft.Win32.Msi": "10.0.100-preview.6.25358.103",
+          "Newtonsoft.Json": "13.0.3",
+          "NuGet.CommandLine.XPlat": "6.15.0-preview.1.86",
+          "System.CommandLine": "2.0.0-beta6.25358.103",
+          "System.CommandLine.StaticCompletions": "10.0.100-preview.6.25358.103",
+          "System.ServiceProcess.ServiceController": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "dotnet.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.Cli.Utils/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyModel": "10.0.0-preview.6.25358.103",
+          "NuGet.Frameworks": "6.15.0-preview.1.86",
+          "NuGet.Packaging": "6.15.0-preview.1.86",
+          "NuGet.ProjectModel": "6.15.0-preview.1.86",
+          "NuGet.Versioning": "6.15.0-preview.1.86",
+          "System.CommandLine": "2.0.0-beta6.25358.103",
+          "System.IO.Hashing": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {
+          "Microsoft.DotNet.Cli.Utils.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.Configurer/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.DotNet.Cli.Utils": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.InternalAbstractions": "10.0.100-preview.6.25358.103",
+          "NuGet.Common": "6.15.0-preview.1.86",
+          "NuGet.Configuration": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "Microsoft.DotNet.Configurer.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.InternalAbstractions/10.0.100-preview.6.25358.103": {
+        "runtime": {
+          "Microsoft.DotNet.InternalAbstractions.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.NativeWrapper/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Deployment.DotNet.Releases": "2.0.0-preview.1.25358.103"
+        },
+        "runtime": {
+          "Microsoft.DotNet.NativeWrapper.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.TemplateLocator/10.0.100-preview.6.25358.103": {
+        "runtime": {
+          "Microsoft.DotNet.TemplateLocator.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.NET.Sdk.WorkloadManifestReader/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Deployment.DotNet.Releases": "2.0.0-preview.1.25358.103"
+        },
+        "runtime": {
+          "Microsoft.NET.Sdk.WorkloadManifestReader.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.NET.Sdk.WorkloadMSBuildSdkResolver/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.DotNet.Cli.Utils": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.NativeWrapper": "10.0.100-preview.6.25358.103",
+          "Microsoft.NET.Sdk.WorkloadManifestReader": "10.0.100-preview.6.25358.103"
+        },
+        "runtime": {
+          "Microsoft.NET.Sdk.WorkloadMSBuildSdkResolver.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.TemplateEngine.Cli/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.DotNet.Cli.Utils": "10.0.100-preview.6.25358.103",
+          "Microsoft.DotNet.Configurer": "10.0.100-preview.6.25358.103",
+          "Microsoft.Extensions.Logging.Console": "10.0.0-preview.6.25358.103",
+          "Microsoft.TemplateEngine.Edge": "10.0.100-preview.6.25358.103",
+          "Microsoft.TemplateSearch.Common": "10.0.100-preview.6.25358.103",
+          "System.CommandLine": "2.0.0-beta6.25358.103"
+        },
+        "runtime": {
+          "Microsoft.TemplateEngine.Cli.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "Microsoft.Win32.Msi/10.0.100-preview.6.25358.103": {
+        "runtime": {
+          "Microsoft.Win32.Msi.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "sdk-tasks/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Tasks.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Deployment.DotNet.Releases": "2.0.0-preview.1.25358.103",
+          "Newtonsoft.Json": "13.0.3",
+          "NuGet.Packaging": "6.15.0-preview.1.86",
+          "NuGet.Versioning": "6.15.0-preview.1.86"
+        },
+        "runtime": {
+          "sdk-tasks.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "System.CommandLine.StaticCompletions/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "System.CommandLine": "2.0.0-beta6.25358.103"
+        },
+        "runtime": {
+          "System.CommandLine.StaticCompletions.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "tool_msbuild/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "Microsoft.Build": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Framework": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Localization": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Tasks.Core": "17.15.0-preview-25358-103",
+          "Microsoft.Build.Utilities.Core": "17.15.0-preview-25358-103",
+          "Microsoft.NET.StringTools": "17.15.0-preview-25358-103",
+          "System.Resources.Extensions": "10.0.0-preview.6.25358.103"
+        },
+        "runtime": {}
+      },
+      "tool_nuget/10.0.100-preview.6.25358.103": {
+        "dependencies": {
+          "NuGet.CommandLine.XPlat": "6.15.0-preview.1.86"
+        },
+        "runtime": {}
+      },
+      "dotnet/10.0.100.0": {
+        "runtime": {
+          "dotnet.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      },
+      "MSBuild/15.1.0.0": {
+        "runtime": {
+          "MSBuild.dll": {
+            "assemblyVersion": "15.1.0.0",
+            "fileVersion": "17.15.0.35903"
+          }
+        }
+      },
+      "Microsoft.DotNet.SdkResolver/10.0.100.0": {
+        "runtime": {
+          "Microsoft.DotNet.SdkResolver.dll": {
+            "assemblyVersion": "10.0.100.0",
+            "fileVersion": "10.1.25.35903"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "dotnet.deps.json/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.ApplicationInsights/2.23.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nWArUZTdU7iqZLycLKWe0TDms48KKGE6pONH2terYNa8REXiqixrMOkf1sk5DHGMaUTqONU2YkS4SAXBhLStgw==",
+      "path": "microsoft.applicationinsights/2.23.0",
+      "hashPath": "microsoft.applicationinsights.2.23.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.DeveloperCertificates.XPlat/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SIdCxbt0/cxEZF5dXB7BvVZekDDsu7U8p3v4LmGSob+ZW3LRDQeOahv5ZSsZAArKB2483SlLqseDFnXFcyA2JQ==",
+      "path": "microsoft.aspnetcore.developercertificates.xplat/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.aspnetcore.developercertificates.xplat.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Build/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+9CbGPc+PgWameYUf2h6p2YhcJ0GiXgC2MYRW9ps/lgEH5sAAy5kHC6jMur5y0E+yE0c4dYYKRHY+cMjc7Jclw==",
+      "path": "microsoft.build/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.build.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.Build.Framework/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W8rM1AmDZJ/OBnho+f3VxPYE/f6WbM4FJYUSn/imvgBjzANQZ4baTTz6g5NY4i8KRNi/mw7vyip1Pvl71zInQg==",
+      "path": "microsoft.build.framework/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.build.framework.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.Build.Localization/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UkuXLDrlSad7ukl/QE2YtiP9CYRDLrmRhIt35icPGvIwpJmVswVe5EgQ9LPFtTjkgpQjJPSOp81FKWTLkeX02w==",
+      "path": "microsoft.build.localization/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.build.localization.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.Build.NuGetSdkResolver/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vgmss00SfExUriVMJYHLYV0GahVnou5NKmbibOunqxS22tPPr7ovCQAXT2sWxpmoILE80vOmXulhg6uFpL3l1Q==",
+      "path": "microsoft.build.nugetsdkresolver/6.15.0-preview.1.86",
+      "hashPath": "microsoft.build.nugetsdkresolver.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "Microsoft.Build.Tasks.Core/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Kra7M4qsuVv2LLt10NGywffc7S5M7r8K1wVlJ1nz1RlDMgG1gbeJEZxQ9o4ZusSIPRmqXmTjf9ZeAsNk3gDNcw==",
+      "path": "microsoft.build.tasks.core/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.build.tasks.core.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.Build.Utilities.Core/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uyCOaO0dl6nD6f0EyyyBNa8PE5lnpBqt1Trz8mCdoGx7TNEfiC21zdw4oyWr8aK3hrW4MNIR1QODA3AVgOK9Pg==",
+      "path": "microsoft.build.utilities.core/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.build.utilities.core.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.Common/5.0.0-1.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D584j7X66PQ73PHZxDIwobD8iaMvX6841qBl71Iz37HtsLgFP1oqTBo3RKwVsj5ud0eqiB5Phu7t0ui62ZjhJw==",
+      "path": "microsoft.codeanalysis.common/5.0.0-1.25358.103",
+      "hashPath": "microsoft.codeanalysis.common.5.0.0-1.25358.103.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.CSharp/5.0.0-1.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hDQ2LvAAGZ0eKXei3Gd30vNZ/Ome6SUWuI/2pSS8LlsDkwRnO2V3x/GT45dJzU+utG3mXIV84/8Yb8ZkLEhoNg==",
+      "path": "microsoft.codeanalysis.csharp/5.0.0-1.25358.103",
+      "hashPath": "microsoft.codeanalysis.csharp.5.0.0-1.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Deployment.DotNet.Releases/2.0.0-preview.1.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sGCBrYd7YuFOlvTxKrvv4221TPR8VWXrSGtn5OKwGDtoZKfG9upMeDUIWdASwCXnPQjTCGKz3VoiaviRXajJtA==",
+      "path": "microsoft.deployment.dotnet.releases/2.0.0-preview.1.25358.103",
+      "hashPath": "microsoft.deployment.dotnet.releases.2.0.0-preview.1.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+GKmmv2dX8QjeJVeTkkLz8aOztjVI759DQJtb0TVTprSQ6Kvoez6B6YwhHnk+CqAGKf9LmZrFMr8UhKYcgCyPw==",
+      "path": "microsoft.extensions.configuration/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.configuration.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JBmhA5klPaBDnczTKrLBT768JdBqOreuLqsM+Ktr0eSS/0rf+A5larMiwSvTOIaVsBFh4uplfcG+cz6eq1LHOA==",
+      "path": "microsoft.extensions.configuration.abstractions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.configuration.abstractions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Binder/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uTzZW9YkH/XDa7gEqHCuwAxLDvZzRSLUe5kB4cuuRq+swZ+Q9G9tAonlwLxtyaAC3yVcruALUOhR0gFoLk7qbg==",
+      "path": "microsoft.extensions.configuration.binder/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.configuration.binder.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.FileExtensions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tVBEcPAaD9gq40h+8Ra7VpK8jpLgVKcuhUvbig7XfHh5JfyOMmbsxIvCsFqLj8b8Sr/IV1ABUNVK5mTRvLLniA==",
+      "path": "microsoft.extensions.configuration.fileextensions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Ini/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-06/VmAYw1hIvVDRoR0ZqHzQecEDFr3OZX3TnqXeCu5XzfZC3PCIxgFK8fR7HbF3KBpvkC+Q46GUEQ3c1f6LSgg==",
+      "path": "microsoft.extensions.configuration.ini/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.configuration.ini.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RuBPMBpyrU6iYbvvLkZ/SC4fzHS3n5PGZOphZxDWbrBqXGZV58TZdUmHyvlZVRKU93YaI8JQFOba4B162Gv8vA==",
+      "path": "microsoft.extensions.dependencyinjection/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.dependencyinjection.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CQdZKtTyq/x33gsLH+U0tnuTH1i84FiQ50c0ZDt/WTBEL2n1b8R5m4xTXkRrRA2M/SiAURbHhW3X5xmcqWQ1ZQ==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyModel/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NfMCu/9++10vCgXqYAO6PbLJvff4eMqkaq9/s9tcZQF0FN9DBcUNf8ykBQRj15x49WSTJcF06cBP9ogH+ISarg==",
+      "path": "microsoft.extensions.dependencymodel/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.dependencymodel.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WuIrBe9bhOll1TApjbZ9x2ETdgD14cWXV3PP6S249uyanVa/OTPxASFgHR/LeJK0Khh28qOau/ZIYT7Yk4jOnw==",
+      "path": "microsoft.extensions.fileproviders.abstractions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Physical/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q803ORbal9kB0rv6OWN4orw/uHVcvu2xRDSDFjmxJU9UIDVM5YPmF2+SUFxZtJ7u+Z0PYbiShXqE8OgbdcwWVQ==",
+      "path": "microsoft.extensions.fileproviders.physical/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.fileproviders.physical.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileSystemGlobbing/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TastiBVZwnuFASkT6RY533iaJB3rz02eV37uApsLZZsiY0VIjnsCTsR8mpoiI1BWJbOxtbJ0Cx1KiPWLAe5vSA==",
+      "path": "microsoft.extensions.filesystemglobbing/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.filesystemglobbing.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e/BK26jHs+9JopQzq5L92JlydlBBiTmGYdLZTTApYcfhVyuoQF4D5oP5NBSD4+zS7jPvTbc93v6Q4Pip+j9ilA==",
+      "path": "microsoft.extensions.logging/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.logging.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z6G8dWinjipqv95kV5/keax1UZvcyPZKJMqPATq0MxwDJhig/Dqs94esb9h+6liEvCo1KxP5ZQsLjmyAS+9NeQ==",
+      "path": "microsoft.extensions.logging.abstractions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.logging.abstractions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Configuration/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wevTdq8/Rad3cfGZrEjirA0o8n+vFTz61OyxLQcse3AKnPZoEH+kqkYc/rQbFr8nnONCQ+e1+JhFRCvOh8x1kA==",
+      "path": "microsoft.extensions.logging.configuration/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.logging.configuration.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Console/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wWu0u8Q+NNgHxxhZue2fZ3pwMuIi5sLftL087szw3i7SUU0K+Yqb/OTP6Lkz4UxytHF4NMeaq6v3n20VCcFW3A==",
+      "path": "microsoft.extensions.logging.console/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.logging.console.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uZmHwWxOKWptNWneTSyKNIi0NrDye+kkfAIcpy1gE/6Lp3LSJRyyU2/VYXs/CKQCabVN4O7OpwF5+8nZHOmEdg==",
+      "path": "microsoft.extensions.options/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.options.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options.ConfigurationExtensions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bqYn6cwOAxS0ZDdCR/0QYBu5jzvtc8Pyl8Xbvemr7Ls3BkBO95WTor2Qu5WCIPZ3v/VPZxX5sUO/leQP+013Eg==",
+      "path": "microsoft.extensions.options.configurationextensions/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.options.configurationextensions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-js9NFw6unlj5AQrQf2mm5fk9XCsJKwKkEUxt/vieRsvpa6u3EU8v62nEhTZnqAbYsg6Ru4O1+jxePdGeZXKmQg==",
+      "path": "microsoft.extensions.primitives/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.extensions.primitives.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.NET.HostModel/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xRQ1jjQk3Ugn/83I7c6pyZNy5EE4wRM2RN+TXTjCVQzOG3kWzHjuG9cIALKsWOFS1puv/xSG4ZkAyySL7d5NRA==",
+      "path": "microsoft.net.hostmodel/10.0.0-preview.6.25358.103",
+      "hashPath": "microsoft.net.hostmodel.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.NET.StringTools/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UFg7mYDr3QhkislXm8NOjpFHpQIwN8DfCWjqE9lqLlL7mwxOk2Q1gYbTf8kWJFq8TPL2aH7VCHQzBNF6/xrjWA==",
+      "path": "microsoft.net.stringtools/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.net.stringtools.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Abstractions/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AHgGrbAdC8X/74A2z7rEJ3X0djTwwr8EaLKrR4n1qCYslzWXUPwkmnBEYFIlgkD2TFIapImfeSzXCYuJoGQSTg==",
+      "path": "microsoft.templateengine.abstractions/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.abstractions.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Core/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MXtT8AUxFISa7TKvRJLxVP+PQwgBDZPpeOw+mlxXnc8ILOL9kfdiEUqLwIazyk8ynxU/6J98esRxI8fvORYSyQ==",
+      "path": "microsoft.templateengine.core/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.core.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Core.Contracts/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fb3wvbj9vPSyU7jhat0F6xQTa7EJ0o+5C/DIi6ges1NJaz8cd/oZMoKZG1ReBi7DglJ6MRT10V+w6aKDXGrShQ==",
+      "path": "microsoft.templateengine.core.contracts/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.core.contracts.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Edge/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AFrulIi7leisjDyD3kqF+bMZ47uEFkaCldPKi+Wd03UKWreM2mlCCH2SxZLIvpzjP1zx7LLAYUu0doNhn+JWeg==",
+      "path": "microsoft.templateengine.edge/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.edge.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Orchestrator.RunnableProjects/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Uo7rZiRFPQNAz6oOzoiETVINVXrDAM2bOPTZV7s8NY1UGXAOEj2HVUOCXOxP4z5FlamtBUmXSKXxw5IRdCTvDg==",
+      "path": "microsoft.templateengine.orchestrator.runnableprojects/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.orchestrator.runnableprojects.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateEngine.Utils/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Uoc8DNAPZrSpZ0TeXYo2MgAMV5FrLpCR7atkmdfpCUE+1vtAdXLprz+Hm9akXuHvvTmbYI9RbpXUHfwft+wJgg==",
+      "path": "microsoft.templateengine.utils/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templateengine.utils.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TemplateSearch.Common/10.0.100-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Eg6tz9XIyzuJxid8CuH9OOi+XhayZ1KAp6GLAnGUmZ7S998Dy55lqIfrNNl/EE3PngO3QHeWRtRnLyHUpNCiHw==",
+      "path": "microsoft.templatesearch.common/10.0.100-preview.6.25358.103",
+      "hashPath": "microsoft.templatesearch.common.10.0.100-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.TestPlatform.Build/17.15.0-preview-25358-103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f0JTZ/qf8jimpaCXeGExn64TDsLyW/8FZR1xGmPGoiBHHp7EfpZ0LO3Ph5DirkFnadM16OBNRwcxcE2kjM0hQQ==",
+      "path": "microsoft.testplatform.build/17.15.0-preview-25358-103",
+      "hashPath": "microsoft.testplatform.build.17.15.0-preview-25358-103.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.SolutionPersistence/1.0.52": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oNv2JtYXhpdJrX63nibx1JT3uCESOBQ1LAk7Dtz/sr0+laW0KRM6eKp4CZ3MHDR2siIkKsY8MmUkeP5DKkQQ5w==",
+      "path": "microsoft.visualstudio.solutionpersistence/1.0.52",
+      "hashPath": "microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "NuGet.Build.Tasks/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PkEkA97a3oQ+ty7Vm64y7B7KAVxixjjv24IaegYZDkBffwy2HHud8fFzLtA0ssVmELHPijx0aNi+WQzzrgRkZg==",
+      "path": "nuget.build.tasks/6.15.0-preview.1.86",
+      "hashPath": "nuget.build.tasks.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Build.Tasks.Console/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KmYFXJ7e1YsuQDmybOf1c/3YDPs/p+JOCTfwYKyYObeG2UWZ/O8TpSzjA60AYHxE5Wwvq14njrXsuMt2Tz77wA==",
+      "path": "nuget.build.tasks.console/6.15.0-preview.1.86",
+      "hashPath": "nuget.build.tasks.console.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.CommandLine.XPlat/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-87ABGen6tCGZT2mo5izFNw67pprrDz8anNXIotitV+IErPehv2nlpztXuwrIBg1Cc6DzX2/hJaBppvxvKr4ZOA==",
+      "path": "nuget.commandline.xplat/6.15.0-preview.1.86",
+      "hashPath": "nuget.commandline.xplat.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Commands/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CKt0+T0UAXwFqES2tSFXOOAwPuC/lIDpOiVjZJVcwOj8GUKh4sYiCYioaMeCgxndO652Ij6C9WgAjrnXKbcVzQ==",
+      "path": "nuget.commands/6.15.0-preview.1.86",
+      "hashPath": "nuget.commands.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Common/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bAr0zzfvR+qAJIEIfCNnOHP5SBTSIG5GvH+T2Mkhcqd+KQ8WCFKiyNwdpHkxVqjCWMBawmUFp2XAtSSSE64NDA==",
+      "path": "nuget.common/6.15.0-preview.1.86",
+      "hashPath": "nuget.common.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Configuration/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SWW2VO8QMs2rIwgmJXcR+lEA2G71dsxG/bP7r2jvHHq56lii2ZMbWzUoLywIuYE+VxvdeBoPxtxeBSAeQasUVA==",
+      "path": "nuget.configuration/6.15.0-preview.1.86",
+      "hashPath": "nuget.configuration.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Credentials/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YY2+GeQVgXeyMtiuGhvj3YQlPK8ofdJEOrQ+gcsogrwlgr0RZw4HSNtlUJIWqr4t3Y88CH64xb7oMj5+2kRfqQ==",
+      "path": "nuget.credentials/6.15.0-preview.1.86",
+      "hashPath": "nuget.credentials.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.DependencyResolver.Core/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VIddF9Fa0gIZTIQ4HZEU6tVkJFsq8f3rlKS014XiTlEoWPF3vIJbhH+4sTz2FzQuh/E87M75vXnOuWAhSnx08w==",
+      "path": "nuget.dependencyresolver.core/6.15.0-preview.1.86",
+      "hashPath": "nuget.dependencyresolver.core.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Frameworks/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DRTA5ctMmau6R6iSae3JdiL+jahmtEd/NGJsByem3TMMrkIiEAYHGfQ/kIL6j1J/QMnkW3OoKv4QBZZ+l3IfRQ==",
+      "path": "nuget.frameworks/6.15.0-preview.1.86",
+      "hashPath": "nuget.frameworks.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.LibraryModel/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3R30iR0R6jEw/oaOkSyyqsDWtrB0lycy2JVpPY7xbrsd0Qhj/DV/lHMRZVrondKAEPoED07F752nVPhpQF8tGg==",
+      "path": "nuget.librarymodel/6.15.0-preview.1.86",
+      "hashPath": "nuget.librarymodel.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Localization/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rclApFqNkfFx4BL7Wm/W9O8HkyB+N/1gTxUPbAxYOwpdfiNffMQBb0c1sVBiZv6zg6KzWPO07gKCe5rcXFRVWg==",
+      "path": "nuget.localization/6.15.0-preview.1.86",
+      "hashPath": "nuget.localization.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Packaging/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BSEEpjkmpxdypgIwnBVFgbURQz0uhiduO3Ro5QFSjIWHl5tKKikcfAWrg/vViuWVPXjJP2qPclVGoFUqKI+svQ==",
+      "path": "nuget.packaging/6.15.0-preview.1.86",
+      "hashPath": "nuget.packaging.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.ProjectModel/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9fUmlnzFuyPxhT5HryKdjsCd7dn77SY0GVhaVaLRmqQeiCuQ+Ftmz8AfawoRUVIGIWUshQqq3aS/cPG+ZsQUgQ==",
+      "path": "nuget.projectmodel/6.15.0-preview.1.86",
+      "hashPath": "nuget.projectmodel.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Protocol/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AgnPe9MuwoYEI716Bh3l96xq4iD9r5LDU96YQjHRJxG/SINNJVbInqtlFL5lvpORnvcwyg9nnprn+vCq7cQdSQ==",
+      "path": "nuget.protocol/6.15.0-preview.1.86",
+      "hashPath": "nuget.protocol.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "NuGet.Versioning/6.15.0-preview.1.86": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-irRBVDAY0X2NXJ+LEo7K8p509sS8Z+F1Ky9/BUroht566fnO2VnH6plYOmoAGADlGNdg+wzfxwO9I9JTHuTjbA==",
+      "path": "nuget.versioning/6.15.0-preview.1.86",
+      "hashPath": "nuget.versioning.6.15.0-preview.1.86.nupkg.sha512"
+    },
+    "System.CodeDom/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rd9Z/R2XRLgKkmuPWPI5WkMO1WroGvjU8Emzsrf8YDYqWQ8J6XUXvidfjrO+OV7WDimIFXRwm8YRnBtW5bwMww==",
+      "path": "system.codedom/10.0.0-preview.6.25358.103",
+      "hashPath": "system.codedom.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.CommandLine/2.0.0-beta6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wjqjlSIRNWFLxyOENiqr/D7hMwK8E3iYwx//VzgMUoDywWncl0/syFRAc5+Etnf9uGOfK9O97oVrsnaRI59Fng==",
+      "path": "system.commandline/2.0.0-beta6.25358.103",
+      "hashPath": "system.commandline.2.0.0-beta6.25358.103.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iq5FPBWgS1jFQI4fdVYlNiB3R9FDQ4rgkhFMJhbQPsaIqkoQnU3FUJyIgd3cqqxd7hf6H+d4kc4qab2Lb08sjQ==",
+      "path": "system.configuration.configurationmanager/10.0.0-preview.6.25358.103",
+      "hashPath": "system.configuration.configurationmanager.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C6MCCouII3XJyuhEg8zq593giX7RTz7C+qaMeU7aPDSxddeie7nv+d0r395s8+KXL7Oc01VrPKLXz2IY52wCmg==",
+      "path": "system.diagnostics.eventlog/10.0.0-preview.6.25358.103",
+      "hashPath": "system.diagnostics.eventlog.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Formats.Nrbf/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7PF9A75MUwCi4dRial+ajSNwBTC26QWgVgy5mq7a+BHR/28aOqy17pWdF6nrm++/JBvBPKHgWSvlKden64u28g==",
+      "path": "system.formats.nrbf/10.0.0-preview.6.25358.103",
+      "hashPath": "system.formats.nrbf.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.IO.Hashing/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-u4GtGIWzBlacq7n2IgIvRauFe1oyLAbJHO+Awn+4sb9bjZ20tgLLxEZ+Fd36XCocifXn/xLBpe86f736Nu9r1g==",
+      "path": "system.io.hashing/10.0.0-preview.6.25358.103",
+      "hashPath": "system.io.hashing.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Reflection.MetadataLoadContext/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FB2MehGSkpIyVAxnf2atkVIf1yFThqklK2Qe2jQ+eSRwtRyimtxnh28FrkLNv1iiO43FOEXI0yaGDAkicbCBoQ==",
+      "path": "system.reflection.metadataloadcontext/10.0.0-preview.6.25358.103",
+      "hashPath": "system.reflection.metadataloadcontext.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Resources.Extensions/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rPNWToD/ML1a8Y6InaZ18VbAdCPJLWCseSU69dHKSA3tneuFhBoKUXirg/ZsLoWMnERU4LCA68Kf4DEkrJ2ImQ==",
+      "path": "system.resources.extensions/10.0.0-preview.6.25358.103",
+      "hashPath": "system.resources.extensions.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Pkcs/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T9YQFunevMDalpE19YEzH/qJBUHnWDCtSdYRtR4U4CtmWbBPjx1G4g/ZC7u5LxFaSWGCVNNZUct+pahB8TTyRQ==",
+      "path": "system.security.cryptography.pkcs/10.0.0-preview.6.25358.103",
+      "hashPath": "system.security.cryptography.pkcs.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jUV+VniG75IT6Xqj9qbFPzyLYf1cGO+FJM+dEahsN1D3rKHZVBLQGAuCQymPAI8O0I5gf3pnldtj9ACxIasXfA==",
+      "path": "system.security.cryptography.protecteddata/10.0.0-preview.6.25358.103",
+      "hashPath": "system.security.cryptography.protecteddata.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Xml/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6kzD+Hn3jseWkAj2mlXTk1N9Tul9jKozwWRInU6WG5qC4GIvSXjJWrPPvX3ZkrmZlsYKxoeo/XhEuFr1gdnJEw==",
+      "path": "system.security.cryptography.xml/10.0.0-preview.6.25358.103",
+      "hashPath": "system.security.cryptography.xml.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "System.ServiceProcess.ServiceController/10.0.0-preview.6.25358.103": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0jd9MePIIbk/KxKQNqX9tMbUETdH+8smpD05ftGZ+PQJIyNygCMkFZWjsXT9TdyhX057rk0x8tXIt5a/PRwDDw==",
+      "path": "system.serviceprocess.servicecontroller/10.0.0-preview.6.25358.103",
+      "hashPath": "system.serviceprocess.servicecontroller.10.0.0-preview.6.25358.103.nupkg.sha512"
+    },
+    "Microsoft.DotNet.Cli/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.Cli.Utils/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.Configurer/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.InternalAbstractions/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.NativeWrapper/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.TemplateLocator/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.NET.Sdk.WorkloadManifestReader/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.NET.Sdk.WorkloadMSBuildSdkResolver/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.TemplateEngine.Cli/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Win32.Msi/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "sdk-tasks/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.CommandLine.StaticCompletions/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "tool_msbuild/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "tool_nuget/10.0.100-preview.6.25358.103": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "dotnet/10.0.100.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MSBuild/15.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.SdkResolver/10.0.100.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

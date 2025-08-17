@@ -1,0 +1,12 @@
+{
+  "name": "@ws-tools/scripts",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "bin": {
+    "ws-tools-scripts": "bin/ws-tools-scripts.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit"
+  }
+}

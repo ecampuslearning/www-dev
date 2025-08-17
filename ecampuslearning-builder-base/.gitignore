@@ -1,0 +1,216 @@
+# Base .gitignore
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.AppleDouble
+.LSOverride
+Icon?
+
+# Editor folders and settings
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*.bak
+*.old
+*.orig
+*~
+
+# Env files and secrets
+.env
+.env.*
+!.env.example
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node
+node_modules/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.a
+*.o
+*.obj
+*.cgo*
+*.cover
+*.mod
+*.sum
+vendor/
+Gopkg.lock
+Gopkg.toml
+bin/
+
+# Rust
+target/
+Cargo.lock
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# C/C++
+*.obj
+*.o
+*.a
+*.so
+*.exe
+*.out
+*.app
+*.dSYM/
+
+# Ruby
+*.gem
+.bundle/
+Gemfile.lock
+
+# PHP
+vendor/
+composer.lock
+
+# Swift
+.build/
+
+# Kotlin
+*.iml
+.idea/
+
+# Android
+*.apk
+*.ap_
+
+# Devcontainer
+.devcontainer/
+.local/*
+!.local/**/.gitkeep
+config/gh/*
+!config/gh/**/.gitkeep
+# Ignore bash history after initial commit
+config/shell/.bash_history
+
+# Test output
+coverage/
+*.lcov
+
+# Build output
+build/
+dist/
+logs/
+
+# Misc
+*.tmp
+.history/
+
+# C#
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+*.mdb
+
+# Haskell
+.stack-work/
+dist/
+
+# Scala
+target/
+lib_managed/
+src_managed/
+project/target/
+project/project/
+
+# Perl
+blib/
+*.bs
+*.pm.tdy
+
+# Elixir/Erlang
+/_build/
+deps/
+erl_crash.dump
+
+# Julia
+*.jl.cov
+*.jl.*
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# LaTeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.synctex.gz
+
+# General
+*.pid
+*.seed
+*.pid.lock
+
+# Terraform
+.terraform/
+crash.log
+
+# Ansible
+.retry
+
+# Vagrant
+.vagrant/
+
+# Chef
+.chef/
+
+# Bazel
+bazel-*
+
+# Maven/Gradle
+.mvn/
+.gradle/
+build/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# Yarn
+yarn.lock
+
+# pnpm
+pnpm-lock.yaml
+
+# Other package managers
+pip-log.txt
+pip-delete-this-directory.txt

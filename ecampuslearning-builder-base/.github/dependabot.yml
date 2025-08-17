@@ -1,0 +1,37 @@
+version: 2
+updates:
+  # Check for updates to Docker images
+  - package-ecosystem: "docker"
+    directory: "/deployments"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "izykitten"
+    assignees:
+      - "izykitten"
+    target-branch: "base-dev"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+
+  # Check for updates to GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "izykitten"
+    assignees:
+      - "izykitten"
+    target-branch: "base-dev"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "github-actions"
+      include: "scope"

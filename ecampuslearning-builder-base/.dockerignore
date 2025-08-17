@@ -1,0 +1,197 @@
+# IDE/editor settings
+.idea/
+.vscode/
+*.code-workspace
+
+# Devcontainer config (do not include in build context)
+.devcontainer/
+
+# Local config and secrets
+.env
+.env.*
+!.env.example
+.venv/
+
+# Build output
+/build/
+/dist/
+/public/
+/deps/
+/logs/
+*.log
+
+# Go build and test output
+*.exe
+*.so
+*.dylib
+*.test
+*.out
+*.coverprofile
+*.mod
+*.sum
+vendor/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Rust
+/target/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# C/C++
+*.obj
+*.o
+*.a
+*.so
+*.exe
+*.out
+*.app
+*.dSYM/
+
+# Ruby
+*.gem
+.bundle/
+Gemfile.lock
+
+# PHP
+vendor/
+composer.lock
+
+# Swift
+.build/
+
+# Kotlin
+*.iml
+.idea/
+
+# Android
+*.apk
+*.ap_
+
+# C#
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+*.mdb
+
+# Haskell
+.stack-work/
+dist/
+
+# Scala
+lib_managed/
+src_managed/
+project/target/
+project/project/
+
+# Perl
+blib/
+*.bs
+*.pm.tdy
+
+# Elixir/Erlang
+/_build/
+erl_crash.dump
+
+# Julia
+*.jl.cov
+*.jl.*
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# LaTeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.synctex.gz
+
+# General
+*.pid
+*.seed
+*.pid.lock
+
+# Editor/OS-specific files
+*.swp
+*.swo
+*.bak
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.AppleDouble
+.LSOverride
+Icon?
+
+# Misc
+*.tmp
+*.old
+*.orig
+*.rej
+.history/
+
+# Terraform
+.terraform/
+crash.log
+
+# Ansible
+.retry
+
+# Vagrant
+.vagrant/
+
+# Chef
+.chef/
+
+# Bazel
+bazel-*
+
+# Maven/Gradle
+.mvn/
+.gradle/
+build/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# Yarn
+yarn.lock
+
+# pnpm
+pnpm-lock.yaml
+
+# Other package managers
+pip-log.txt
+pip-delete-this-directory.txt

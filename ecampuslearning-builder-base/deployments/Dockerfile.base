@@ -1,0 +1,618 @@
+## Base image and workspace configuration
+ARG BASE_IMAGE="docker.io/library/ubuntu"
+## Pin base image to a specific tag for reproducibility
+ARG BASE_IMAGE_TAG="24.04"
+## Pin to a specific digest for security (optional)
+ARG BASE_IMAGE_DIGEST="sha256:a08e551cb33850e4740772b38217fc1796a66da2506d312abe51acda354ff061"
+## To update digest: docker pull ubuntu:24.04 && docker inspect --format='{{index .RepoDigests 0}}' ubuntu:24.04
+## Use Dependabot or CI/CD to check for updates
+ARG USER
+ARG PROJECT
+ARG WORKSPACE_DIR
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+
+## Locale and timezone settings (can be overridden at build/runtime)
+ARG CONTAINER_LOCALE="en_US.UTF-8"
+ARG CONTAINER_TIMEZONE="UTC"
+
+## Metadata values (used for OCI labels, customizable per build)
+ARG IMAGE_AUTHORS="unknown"
+ARG IMAGE_MAINTAINERS_JSON='[{"name":"unknown","email":"unknown"}]'
+ARG IMAGE_VENDOR="unknown"
+ARG IMAGE_VENDOR_URL="unknown"
+ARG IMAGE_SOURCE="unknown"
+ARG IMAGE_DEPRECATED=""
+ARG IMAGE_GITHUB_COLOR="purple"
+ARG IMAGE_FEATURES="unknown"
+ARG IMAGE_KEYWORDS="unknown"
+ARG IMAGE_TITLE="unknown"
+ARG IMAGE_DESCRIPTION="unknown"
+
+## Core image metadata (tracks version, build time, source control)
+ARG IMAGE_VERSION="unknown"
+ARG IMAGE_CREATED="unknown"
+ARG IMAGE_REVISION="unknown"
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+ARG USER
+ARG PROJECT
+ARG WORKSPACE_DIR
+
+## Original image provenance (creator and license info)
+ARG IMAGE_ORIGINAL_VENDOR="izykitten"
+ARG IMAGE_ORIGINAL_VENDOR_URL="https://github.com/izykitten"
+ARG IMAGE_ORIGINAL_AUTHOR="izy"
+ARG IMAGE_ORIGINAL_SOURCE="https://github.com/izykitten/devcontainer"
+ARG IMAGE_LICENSES="BSD-3-Clause"
+
+## Dependabot references (commented, parsed for update tracking)
+
+## Stage 1: Extract base image digest from registry (tracks exact base image)
+FROM docker.io/library/alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1 AS digest_extractor
+
+## Redeclare required ARGs for this stage
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+
+## Use cache mount for Alpine package operations
+RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
+    apk add --no-cache skopeo jq curl
+
+## Retrieve digest for the specified base image and create digest label
+RUN skopeo inspect docker://${BASE_IMAGE}:${BASE_IMAGE_TAG}@${BASE_IMAGE_DIGEST} | jq -r '.Digest' > /tmp/base_digest && \
+    echo "LABEL org.opencontainers.image.base.digest=\"$(cat /tmp/base_digest)\"" > /tmp/digest_label
+
+## Stage 2: Build the final image
+FROM ${BASE_IMAGE}:${BASE_IMAGE_TAG}@${BASE_IMAGE_DIGEST}
+
+## Copy digest label from previous stage
+COPY --from=digest_extractor /tmp/digest_label /tmp/digest_label
+
+## Redeclare build args for final stage
+ARG IMAGE_AUTHORS
+ARG IMAGE_MAINTAINERS_JSON
+ARG IMAGE_VENDOR
+ARG IMAGE_VENDOR_URL
+ARG IMAGE_SOURCE
+ARG IMAGE_DEPRECATED
+ARG IMAGE_GITHUB_COLOR
+ARG IMAGE_FEATURES
+ARG IMAGE_KEYWORDS
+ARG IMAGE_TITLE
+ARG IMAGE_DESCRIPTION
+ARG IMAGE_VERSION
+ARG IMAGE_CREATED
+ARG IMAGE_REVISION
+ARG BASE_IMAGE
+ARG BASE_IMAGE_TAG
+ARG BASE_IMAGE_DIGEST
+ARG USER
+ARG PROJECT
+ARG WORKSPACE_DIR
+ARG IMAGE_ORIGINAL_VENDOR
+ARG IMAGE_ORIGINAL_VENDOR_URL
+ARG IMAGE_ORIGINAL_AUTHOR
+ARG IMAGE_ORIGINAL_SOURCE
+ARG IMAGE_LICENSES
+ARG CONTAINER_LOCALE
+ARG CONTAINER_TIMEZONE
+
+## Apply the digest labels
+LABEL org.opencontainers.image.base.digest="$(cat /tmp/base_digest)"
+
+## Set OCI and Artifact Hub labels for image metadata
+LABEL org.opencontainers.image.title="$IMAGE_TITLE" \
+      org.opencontainers.image.description="$IMAGE_DESCRIPTION" \
+      org.opencontainers.image.authors="$IMAGE_AUTHORS" \
+      org.opencontainers.image.original_author="$IMAGE_ORIGINAL_AUTHOR" \
+      org.opencontainers.image.original_source="$IMAGE_ORIGINAL_SOURCE" \
+      org.opencontainers.image.version="$IMAGE_VERSION" \
+      org.opencontainers.image.created="$IMAGE_CREATED" \
+      org.opencontainers.image.revision="$IMAGE_REVISION" \
+      org.opencontainers.image.source="$IMAGE_SOURCE" \
+      org.opencontainers.image.licenses="$IMAGE_LICENSES" \
+      org.opencontainers.image.documentation="$IMAGE_SOURCE/docs" \
+      org.opencontainers.image.vendor="$IMAGE_VENDOR" \
+      org.opencontainers.image.base.name="$BASE_IMAGE:$BASE_IMAGE_TAG" \
+      org.opencontainers.image.base.digest="$BASE_IMAGE_DIGEST" \
+      org.opencontainers.image.url="$IMAGE_SOURCE" \
+      org.opencontainers.image.ref.name="${PROJECT}" \
+      org.opencontainers.image.deprecated="$IMAGE_DEPRECATED" \
+      com.github.actions.color="$IMAGE_GITHUB_COLOR" \
+      io.artifacthub.package.readme-url="$IMAGE_SOURCE/README.md" \
+      io.artifacthub.package.maintainers="$IMAGE_MAINTAINERS_JSON" \
+      io.artifacthub.package.license="$IMAGE_LICENSES" \
+      io.artifacthub.package.keywords="$IMAGE_KEYWORDS" \
+      dev.containers.features="$IMAGE_FEATURES" \
+      dev.containers.id="$PROJECT"
+
+## Set non-interactive frontend for apt
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=$USER
+ENV PIPX_BIN_DIR=/usr/local/bin
+ENV PIPX_HOME=/usr/local/share/pipx
+ENV PIPX_MAN_DIR=/usr/local/share/man
+ENV PIPX_SHARED_LIBS=/usr/local/share/pipx/shared
+
+## Install core system dependencies (single block for fewer layers, efficient cache usage)
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends \
+    # Locale and timezone
+    locales \
+    tzdata \
+    # Networking
+    aria2 \
+    dnsutils \
+    iftop \
+    inxi \
+    ipcalc \
+    iperf3 \
+    iproute2 \
+    iputils-ping \
+    mtr \
+    ncat \
+    netcat-openbsd \
+    nethogs \
+    ngrep \
+    nmap \
+    socat \
+    tcpdump \
+    traceroute \
+    wget \
+    whois \
+    # Shells & terminal utilities
+    bash \
+    entr \
+    tmux \
+    watch \
+    zsh \
+    # Editors & viewers
+    bat \
+    btop \
+    fzf \
+    glances \
+    htop \
+    less \
+    mc \
+    micro \
+    neofetch \
+    pv \
+    tldr \
+    tree \
+    # System utilities
+    at \
+    boxes \
+    coreutils \
+    csvkit \
+    direnv \
+    dos2unix \
+    fd-find \
+    fdupes \
+    file \
+    git-delta \
+    git-extras \
+    git-filter-repo \
+    git-lfs \
+    iotop \
+    jq \
+    lsb-release \
+    lsof \
+    ltrace \
+    make \
+    man-db \
+    nano \
+    ncdu \
+    parallel \
+    ripgrep \
+    rsync \
+    shellcheck \
+    silversearcher-ag \
+    strace \
+    sudo \
+    sysstat \
+    tig \
+    trash-cli \
+    universal-ctags \
+    unzip \
+    uuid-runtime \
+    vim \
+    yq \
+    # Compression & archiving
+    bzip2 \
+    ca-certificates \
+    command-not-found \
+    xz-utils \
+    zip \
+    # Repository & security tools
+    ca-certificates \
+    curl \
+    gnupg \
+    gnupg2 \
+    # Python & pip
+    pipx \
+    python3 \
+    python3-pip \
+    python3-venv \
+    # HTTP tools
+    httpie \
+    # Extra dev tools
+    gettext \
+    libffi-dev \
+    libssl-dev \
+    libxml2-utils \
+    logrotate \
+    openssh-client \
+    patch \
+    psmisc \
+    rsyslog
+
+## Configure locale and timezone
+RUN localedef -i ${CONTAINER_LOCALE%.*} -c -f UTF-8 -A /usr/share/locale/locale.alias ${CONTAINER_LOCALE} && \
+    ln -fs /usr/share/zoneinfo/${CONTAINER_TIMEZONE} /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+ENV LANG=${CONTAINER_LOCALE} \
+    LANGUAGE=${CONTAINER_LOCALE%.*}:${CONTAINER_LOCALE%_*} \
+    LC_ALL=${CONTAINER_LOCALE} \
+    TZ=${CONTAINER_TIMEZONE}
+
+## Use bash with pipefail for all RUN instructions
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+## Prepare environment for external repositories and install packages in one step
+RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    set -e && \
+    mkdir -p /etc/apt/keyrings && \
+    # GitHub CLI repository
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /tmp/download-cache/github-cli.gpg && \
+    dd if=/tmp/download-cache/github-cli.gpg of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list && \
+    # Docker repository
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /tmp/download-cache/docker.gpg && \
+    gpg --dearmor < /tmp/download-cache/docker.gpg > /etc/apt/keyrings/docker.gpg && \
+    chmod a+r /etc/apt/keyrings/docker.gpg && \
+    . /etc/os-release && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $VERSION_CODENAME stable" > /etc/apt/sources.list.d/docker.list && \
+    # Trivy repository
+    curl -fsSL https://aquasecurity.github.io/trivy-repo/deb/public.key -o /tmp/download-cache/trivy-public.key && \
+    gpg --dearmor < /tmp/download-cache/trivy-public.key > /etc/apt/keyrings/trivy.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" > /etc/apt/sources.list.d/trivy.list && \
+    # Kubernetes repository
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key -o /tmp/download-cache/kubernetes.key && \
+    gpg --dearmor < /tmp/download-cache/kubernetes.key > /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+    chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /" > /etc/apt/sources.list.d/kubernetes.list && \
+    # Update and install all packages from external repositories
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    # GitHub tools
+    gh \
+    # Docker tools
+    docker-ce-cli \
+    docker-buildx-plugin \
+    docker-compose-plugin \
+    # Security tools from Trivy repo
+    trivy \
+    # Kubernetes tools
+    kubectl
+
+## Install container analysis and security scanning tools (single RUN block)
+RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+    --mount=type=cache,target=/root/.cache/pipx,sharing=locked \
+    # hadolint (Dockerfile linter)
+    for i in {1..3}; do \
+        HADOLINT_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/hadolint/hadolint/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$HADOLINT_VERSION" ]; then echo "Found hadolint version: $HADOLINT_VERSION" && break; else echo "Empty hadolint version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$HADOLINT_VERSION" ] || { echo "Failed to get hadolint version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/hadolint-${HADOLINT_VERSION}" ]; then \
+        echo "Downloading hadolint ${HADOLINT_VERSION}" && \
+        curl -fsSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 \
+        -o /tmp/download-cache/hadolint-${HADOLINT_VERSION}; \
+    fi && \
+    cp /tmp/download-cache/hadolint-${HADOLINT_VERSION} /usr/local/bin/hadolint && \
+    chmod +x /usr/local/bin/hadolint && \
+    # dive (image layer explorer)
+    for i in {1..3}; do \
+        DIVE_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/wagoodman/dive/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$DIVE_VERSION" ]; then echo "Found dive version: $DIVE_VERSION" && break; else echo "Empty dive version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$DIVE_VERSION" ] || { echo "Failed to get dive version after 3 attempts"; exit 1; } && \
+    DIVE_VERSION_CLEAN=${DIVE_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/dive_${DIVE_VERSION_CLEAN}.deb" ]; then \
+        echo "Downloading dive ${DIVE_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 "https://github.com/wagoodman/dive/releases/download/${DIVE_VERSION}/dive_${DIVE_VERSION_CLEAN}_linux_amd64.deb" \
+        -o /tmp/download-cache/dive_${DIVE_VERSION_CLEAN}.deb; \
+    fi && \
+    apt-get install -y /tmp/download-cache/dive_${DIVE_VERSION_CLEAN}.deb && \
+    # dockle (container linter)
+    for i in {1..3}; do \
+        DOCKLE_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/goodwithtech/dockle/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$DOCKLE_VERSION" ]; then echo "Found dockle version: $DOCKLE_VERSION" && break; else echo "Empty dockle version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$DOCKLE_VERSION" ] || { echo "Failed to get dockle version after 3 attempts"; exit 1; } && \
+    DOCKLE_VERSION=${DOCKLE_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/dockle_${DOCKLE_VERSION}.deb" ]; then \
+        echo "Downloading dockle ${DOCKLE_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 "https://github.com/goodwithtech/dockle/releases/download/v${DOCKLE_VERSION}/dockle_${DOCKLE_VERSION}_Linux-64bit.deb" \
+        -o /tmp/download-cache/dockle_${DOCKLE_VERSION}.deb; \
+    fi && \
+    apt-get install -y --no-install-recommends /tmp/download-cache/dockle_${DOCKLE_VERSION}.deb && \
+    # fastfetch (faster alternative to neofetch)
+    for i in {1..3}; do \
+        FASTFETCH_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$FASTFETCH_VERSION" ]; then echo "Found fastfetch version: $FASTFETCH_VERSION" && break; else echo "Empty fastfetch version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$FASTFETCH_VERSION" ] || { echo "Failed to get fastfetch version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/fastfetch-linux-amd64.deb" ]; then \
+        echo "Downloading fastfetch ${FASTFETCH_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/fastfetch-cli/fastfetch/releases/download/${FASTFETCH_VERSION}/fastfetch-linux-amd64.deb \
+        -o /tmp/download-cache/fastfetch-linux-amd64.deb; \
+    fi && \
+    apt-get install -y --no-install-recommends /tmp/download-cache/fastfetch-linux-amd64.deb && \
+    # goss (server/container validation tool)
+    for i in {1..3}; do \
+        GOSS_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/goss-org/goss/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$GOSS_VERSION" ]; then echo "Found GOSS version: $GOSS_VERSION" && break; else echo "Empty GOSS version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$GOSS_VERSION" ] || { echo "Failed to get GOSS version after 3 attempts"; exit 1; } && \
+    GOSS_VERSION_CLEAN=${GOSS_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/goss-${GOSS_VERSION_CLEAN}" ]; then \
+        echo "Downloading goss ${GOSS_VERSION}" && \
+        curl -fsSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/goss-org/goss/releases/download/${GOSS_VERSION}/goss-linux-amd64 -o /tmp/download-cache/goss-${GOSS_VERSION_CLEAN}; \
+    fi && \
+    cp /tmp/download-cache/goss-${GOSS_VERSION_CLEAN} /usr/local/bin/goss && \
+    chmod +x /usr/local/bin/goss && \
+    # grype (vulnerability scanner)
+    for i in {1..3}; do \
+        GRYPE_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/anchore/grype/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$GRYPE_VERSION" ]; then echo "Found grype version: $GRYPE_VERSION" && break; else echo "Empty grype version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$GRYPE_VERSION" ] || { echo "Failed to get grype version after 3 attempts"; exit 1; } && \
+    GRYPE_VERSION_CLEAN=${GRYPE_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/grype-${GRYPE_VERSION_CLEAN}" ]; then \
+        echo "Downloading grype ${GRYPE_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/anchore/grype/releases/download/${GRYPE_VERSION}/grype_${GRYPE_VERSION_CLEAN}_linux_amd64.tar.gz \
+        -o /tmp/download-cache/grype-${GRYPE_VERSION_CLEAN}.tar.gz; \
+    fi && \
+    mkdir -p /tmp/grype && \
+    tar xz -C /tmp/grype -f /tmp/download-cache/grype-${GRYPE_VERSION_CLEAN}.tar.gz && \
+    cp /tmp/grype/grype /usr/local/bin/grype && \
+    chmod +x /usr/local/bin/grype && \
+    # syft (SBOM generator)
+    for i in {1..3}; do \
+        SYFT_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/anchore/syft/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$SYFT_VERSION" ]; then echo "Found syft version: $SYFT_VERSION" && break; else echo "Empty syft version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$SYFT_VERSION" ] || { echo "Failed to get syft version after 3 attempts"; exit 1; } && \
+    SYFT_VERSION_CLEAN=${SYFT_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/syft-${SYFT_VERSION_CLEAN}" ]; then \
+        echo "Downloading syft ${SYFT_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/anchore/syft/releases/download/${SYFT_VERSION}/syft_${SYFT_VERSION_CLEAN}_linux_amd64.tar.gz \
+        -o /tmp/download-cache/syft-${SYFT_VERSION_CLEAN}.tar.gz; \
+    fi && \
+    mkdir -p /tmp/syft && \
+    tar xz -C /tmp/syft -f /tmp/download-cache/syft-${SYFT_VERSION_CLEAN}.tar.gz && \
+    cp /tmp/syft/syft /usr/local/bin/syft && \
+    chmod +x /usr/local/bin/syft && \
+    # Additional security tools via pipx
+    pipx install checkov && \
+    pipx install in-toto && \
+    # Snyk CLI (security scanner)
+    for i in {1..3}; do \
+        SNYK_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/snyk/cli/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$SNYK_VERSION" ]; then echo "Found Snyk version: $SNYK_VERSION" && break; else echo "Empty Snyk version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$SNYK_VERSION" ] || { echo "Failed to get Snyk version after 3 attempts"; exit 1; } && \
+    SNYK_VERSION_CLEAN=${SNYK_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/snyk-${SNYK_VERSION_CLEAN}" ]; then \
+        echo "Downloading Snyk ${SNYK_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/snyk/cli/releases/download/${SNYK_VERSION}/snyk-linux \
+        -o /tmp/download-cache/snyk-${SNYK_VERSION_CLEAN}; \
+    fi && \
+    cp /tmp/download-cache/snyk-${SNYK_VERSION_CLEAN} /usr/local/bin/snyk && \
+    chmod +x /usr/local/bin/snyk
+
+## Install container visualization, inspection, and runtime tools
+RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+    # container-structure-test (Google's container structure tester)
+    for i in {1..3}; do \
+        CST_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/GoogleContainerTools/container-structure-test/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$CST_VERSION" ]; then echo "Found CST version: $CST_VERSION" && break; else echo "Empty CST version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$CST_VERSION" ] || { echo "Failed to get CST version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/container-structure-test-${CST_VERSION}" ]; then \
+        echo "Downloading container-structure-test ${CST_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/GoogleContainerTools/container-structure-test/releases/latest/download/container-structure-test-linux-amd64 \
+        -o /tmp/download-cache/container-structure-test-${CST_VERSION}; \
+    fi && \
+    cp /tmp/download-cache/container-structure-test-${CST_VERSION} /usr/local/bin/container-structure-test && \
+    chmod +x /usr/local/bin/container-structure-test && \
+    # ctop (container metrics UI)
+    for i in {1..3}; do \
+        CTOP_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/bcicen/ctop/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$CTOP_VERSION" ]; then echo "Found ctop version: $CTOP_VERSION" && break; else echo "Empty ctop version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$CTOP_VERSION" ] || { echo "Failed to get ctop version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/ctop-${CTOP_VERSION}" ]; then \
+        echo "Downloading ctop ${CTOP_VERSION}" && \
+        curl -L --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/bcicen/ctop/releases/latest/download/ctop-linux-amd64 \
+        -o /tmp/download-cache/ctop-${CTOP_VERSION}; \
+    fi && \
+    cp /tmp/download-cache/ctop-${CTOP_VERSION} /usr/local/bin/ctop && \
+    chmod +x /usr/local/bin/ctop && \
+    # opa (Open Policy Agent)
+    for i in {1..3}; do \
+        OPA_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/open-policy-agent/opa/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$OPA_VERSION" ]; then echo "Found OPA version: $OPA_VERSION" && break; else echo "Empty OPA version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$OPA_VERSION" ] || { echo "Failed to get OPA version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/opa-${OPA_VERSION}" ]; then \
+        echo "Downloading OPA ${OPA_VERSION}" && \
+        curl -L --retry 3 --retry-delay 5 --connect-timeout 10 -o /tmp/download-cache/opa-${OPA_VERSION} https://openpolicyagent.org/downloads/latest/opa_linux_amd64; \
+    fi && \
+    cp /tmp/download-cache/opa-${OPA_VERSION} /usr/local/bin/opa && \
+    chmod +x /usr/local/bin/opa && \
+    # crictl (CRI-compatible container runtime CLI)
+    for i in {1..3}; do \
+        VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/kubernetes-sigs/cri-tools/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$VERSION" ]; then echo "Found crictl version: $VERSION" && break; else echo "Empty crictl version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$VERSION" ] || { echo "Failed to get crictl version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/crictl-${VERSION}.tar.gz" ]; then \
+        echo "Downloading crictl ${VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/kubernetes-sigs/cri-tools/releases/download/${VERSION}/crictl-${VERSION}-linux-amd64.tar.gz \
+        -o /tmp/download-cache/crictl-${VERSION}.tar.gz; \
+    fi && \
+    tar xz -C /usr/local/bin -f /tmp/download-cache/crictl-${VERSION}.tar.gz
+
+
+## Install container signing, attestation, and security monitoring tools (single RUN block)
+RUN --mount=type=cache,target=/tmp/download-cache,sharing=locked \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    set -e && \
+    # conftest
+    for i in {1..3}; do \
+        echo "Attempt $i: Fetching latest conftest version" && \
+        CONFTEST_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/open-policy-agent/conftest/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$CONFTEST_VERSION" ]; then echo "Found version: $CONFTEST_VERSION" && break; else echo "Empty version, retrying..." && sleep 5; fi; \
+    done && \
+    [ -n "$CONFTEST_VERSION" ] || { echo "Failed to get conftest version after 3 attempts"; exit 1; } && \
+    CONFTEST_VERSION_CLEAN=${CONFTEST_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/conftest_${CONFTEST_VERSION_CLEAN}_Linux_x86_64.tar.gz" ]; then \
+        echo "Downloading conftest ${CONFTEST_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/open-policy-agent/conftest/releases/download/${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION_CLEAN}_Linux_x86_64.tar.gz \
+        -o /tmp/download-cache/conftest_${CONFTEST_VERSION_CLEAN}_Linux_x86_64.tar.gz; \
+    fi && \
+    mkdir -p /tmp/conftest && \
+    tar xz -C /tmp/conftest -f /tmp/download-cache/conftest_${CONFTEST_VERSION_CLEAN}_Linux_x86_64.tar.gz && \
+    cp /tmp/conftest/conftest /usr/local/bin/conftest && \
+    chmod +x /usr/local/bin/conftest && \
+    # cosign
+    for i in {1..3}; do \
+        echo "Attempt $i: Fetching latest cosign version" && \
+        COSIGN_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/sigstore/cosign/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$COSIGN_VERSION" ]; then echo "Found version: $COSIGN_VERSION" && break; else echo "Empty version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$COSIGN_VERSION" ] || { echo "Failed to get cosign version after 3 attempts"; exit 1; } && \
+    COSIGN_VERSION_CLEAN=${COSIGN_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/cosign-${COSIGN_VERSION_CLEAN}" ]; then \
+        echo "Downloading cosign ${COSIGN_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64 \
+        -o /tmp/download-cache/cosign-${COSIGN_VERSION_CLEAN}; \
+    fi && \
+    cp /tmp/download-cache/cosign-${COSIGN_VERSION_CLEAN} /usr/local/bin/cosign && \
+    chmod +x /usr/local/bin/cosign && \
+    # Docker Bench Security (CIS Docker Benchmark)
+    for i in {1..3}; do \
+        BENCH_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/docker/docker-bench-security/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$BENCH_VERSION" ]; then echo "Found Docker Bench Security version: $BENCH_VERSION" && break; else echo "Empty version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$BENCH_VERSION" ] || { echo "Failed to get Docker Bench Security version after 3 attempts"; exit 1; } && \
+    if [ ! -f "/tmp/download-cache/docker-bench-security-${BENCH_VERSION}.tar.gz" ]; then \
+        echo "Downloading Docker Bench Security ${BENCH_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/docker/docker-bench-security/archive/refs/tags/${BENCH_VERSION}.tar.gz \
+        -o /tmp/download-cache/docker-bench-security-${BENCH_VERSION}.tar.gz; \
+    fi && \
+    mkdir -p /usr/local/docker-bench-security && \
+    tar xz -C /usr/local/docker-bench-security --strip-components=1 -f /tmp/download-cache/docker-bench-security-${BENCH_VERSION}.tar.gz && \
+    chmod +x /usr/local/docker-bench-security/docker-bench-security.sh && \
+    ln -s /usr/local/docker-bench-security/docker-bench-security.sh /usr/local/bin/docker-bench-security && \
+    # notation
+    for i in {1..3}; do \
+        echo "Attempt $i: Fetching latest notation version" && \
+        NOTATION_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/notaryproject/notation/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$NOTATION_VERSION" ]; then echo "Found version: $NOTATION_VERSION" && break; else echo "Empty version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$NOTATION_VERSION" ] || { echo "Failed to get notation version after 3 attempts"; exit 1; } && \
+    NOTATION_VERSION_CLEAN=${NOTATION_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/notation-${NOTATION_VERSION_CLEAN}.tar.gz" ]; then \
+        echo "Downloading notation ${NOTATION_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/notaryproject/notation/releases/download/${NOTATION_VERSION}/notation_${NOTATION_VERSION_CLEAN}_linux_amd64.tar.gz \
+        -o /tmp/download-cache/notation-${NOTATION_VERSION_CLEAN}.tar.gz; \
+    fi && \
+    mkdir -p /tmp/notation && \
+    tar xz -C /tmp/notation -f /tmp/download-cache/notation-${NOTATION_VERSION_CLEAN}.tar.gz && \
+    cp /tmp/notation/notation /usr/local/bin/notation && \
+    chmod +x /usr/local/bin/notation && \
+    # oras
+    for i in {1..3}; do \
+        echo "Attempt $i: Fetching latest oras version" && \
+        ORAS_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/oras-project/oras/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$ORAS_VERSION" ]; then echo "Found version: $ORAS_VERSION" && break; else echo "Empty version, retrying..." && sleep 10; fi; \
+    done && \
+    [ -n "$ORAS_VERSION" ] || { echo "Failed to get oras version after 3 attempts"; exit 1; } && \
+    ORAS_VERSION_CLEAN=${ORAS_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/oras-${ORAS_VERSION_CLEAN}.tar.gz" ]; then \
+        echo "Downloading oras ${ORAS_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/oras-project/oras/releases/download/${ORAS_VERSION}/oras_${ORAS_VERSION_CLEAN}_linux_amd64.tar.gz \
+        -o /tmp/download-cache/oras-${ORAS_VERSION_CLEAN}.tar.gz; \
+    fi && \
+    mkdir -p /tmp/oras && \
+    tar xz -C /tmp/oras -f /tmp/download-cache/oras-${ORAS_VERSION_CLEAN}.tar.gz && \
+    cp /tmp/oras/oras /usr/local/bin/oras && \
+    chmod +x /usr/local/bin/oras && \
+    # ratify
+    for i in {1..3}; do \
+        echo "Attempt $i: Fetching latest ratify version" && \
+        RATIFY_VERSION=$(curl -sS --retry 3 --retry-delay 5 --connect-timeout 10 https://api.github.com/repos/notaryproject/ratify/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+        if [ -n "$RATIFY_VERSION" ]; then echo "Found version: $RATIFY_VERSION" && break; else echo "Empty version, retrying..." && sleep 5; fi; \
+    done && \
+    [ -n "$RATIFY_VERSION" ] || { echo "Failed to get ratify version after 3 attempts"; exit 1; } && \
+    RATIFY_VERSION_CLEAN=${RATIFY_VERSION#v} && \
+    if [ ! -f "/tmp/download-cache/ratify_${RATIFY_VERSION_CLEAN}_linux_amd64.tar.gz" ]; then \
+        echo "Downloading ratify ${RATIFY_VERSION}" && \
+        curl -sSL --retry 3 --retry-delay 5 --connect-timeout 10 https://github.com/notaryproject/ratify/releases/download/${RATIFY_VERSION}/ratify_${RATIFY_VERSION_CLEAN}_linux_amd64.tar.gz \
+        -o /tmp/download-cache/ratify_${RATIFY_VERSION_CLEAN}_linux_amd64.tar.gz; \
+    fi && \
+    mkdir -p /tmp/ratify && \
+    tar xz -C /tmp/ratify -f /tmp/download-cache/ratify_${RATIFY_VERSION_CLEAN}_linux_amd64.tar.gz && \
+    cp /tmp/ratify/ratify /usr/local/bin/ratify && \
+    chmod +x /usr/local/bin/ratify
+
+## Ensure a clean non-root user and group with UID/GID 1000 for devcontainer
+RUN set -euxo pipefail; \
+    # Remove any existing user with UID 1000 (from base image)
+    if id -u 1000 >/dev/null 2>&1; then \
+        olduser=$(getent passwd 1000 | cut -d: -f1); \
+        pkill -u "$olduser" || true; \
+        userdel -r "$olduser" || true; \
+        rm -rf /home/"$olduser" || true; \
+        rm -f /etc/sudoers.d/"$olduser" || true; \
+    fi; \
+    # Remove any existing group with GID 1000
+    if getent group 1000 >/dev/null 2>&1; then \
+        oldgroup=$(getent group 1000 | cut -d: -f1); \
+        groupdel "$oldgroup" || true; \
+    fi; \
+    # Remove sudoers file for $USER if present
+    rm -f /etc/sudoers.d/$USER || true; \
+    # Create new group and user with UID/GID 1000
+        groupadd --gid 1000 "$USER"; \
+        useradd --uid 1000 --gid 1000 -m -s /bin/bash "$USER"; \
+    # Add $USER to sudo group
+    usermod -aG sudo "$USER"; \
+    # Configure passwordless sudo for all sudo group members
+    echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/sudo-nopasswd && \
+    chmod 0440 /etc/sudoers.d/sudo-nopasswd && \
+    # Mark sudo as successful for admin tools
+    mkdir -p /var/lib/sudo/ts; \
+        touch /var/lib/sudo/ts/.sudo_as_admin_successful
+
+USER $USER
+WORKDIR /workspaces
+
+## Reset DEBIAN_FRONTEND for interactive use
+ENV DEBIAN_FRONTEND=dialog

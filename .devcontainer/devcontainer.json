@@ -81,7 +81,24 @@
                 "docsmsft.docs-authoring-pack",
                 "XuangeAha.vsmarketplace-badges",
                 "docsmsft.learnlinter",
-                "Vue.volar"
+                "Vue.volar",
+                "maciejdems.add-to-gitignore",
+                "samschneller.git-add-remote",
+                "antfu.open-in-github-button",
+                "nyxb.open-on-github",
+                "msoffice.microsoft-office-add-in-debugger",
+                "Abromeit.add-hint-link-to-manual",
+                "mhutchie.git-graph",
+                "AmazonWebServices.aws-toolkit-vscode",
+                "ms-vscode.azurecli",
+                "msjsdiag.cordova-tools",
+                "vsls-contrib.gitdoc",
+                "msazurermtools.azurerm-vscode-tools",
+                "GitHub.codespaces",
+                "GitHub.remotehub",
+                "Edgaras7.ms-planner",
+                "FrancescoAnzalone.vsc-todo",
+                "ms-dotnettools.vscode-dotnet-runtime"
             ]
 		}
 	},

@@ -1,0 +1,49 @@
+name: Discover Versions
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        required: false
+        type: boolean
+
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Nixpacks
+        run: curl -sSL https://nixpacks.com/install.sh | bash
+
+      - name: Install Packages
+        run: bun i
+
+      - name: Run Discover Versions
+        run: bun start ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+        working-directory: 'scripts/check-versions'
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "metorial[bot]"
+          git config user.email "120314019+metorial@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Add new container versions"
+            git push
+          fi
